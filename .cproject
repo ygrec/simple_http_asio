@@ -18,6 +18,9 @@
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.PE" id="cdt.managedbuild.target.gnu.platform.mingw.base.1465823993" name="Debug Platform" osList="win32" superClass="cdt.managedbuild.target.gnu.platform.mingw.base"/>
 							<builder buildPath="${workspace_loc:/app_004_http}/Debug" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1455548416" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.base.316696453" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.base">
+								<option id="gnu.both.asm.option.include.paths.601908536" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1215459870" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.1878668313" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
@@ -27,9 +30,16 @@
 								<option id="gnu.cpp.compiler.option.dialect.std.2026356325" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.791144910" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WINNT_WIN32=0x0501"/>
+									<listOptionValue builtIn="false" value="_WIN32_WINNT=0x0501"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.1867303783" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;C:\boost_1_6\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BoostDir}/include&quot;"/>
+									<listOptionValue builtIn="false" value="C:/MinGW/include"/>
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include"/>
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++"/>
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++/backward"/>
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++/mingw32"/>
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include-fixed"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.flags.398969376" name="Other dialect flags" superClass="gnu.cpp.compiler.option.dialect.flags" useByScannerDiscovery="true" value="-std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.870097373" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -37,14 +47,17 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.877375676" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.709280749" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.722747264" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.2052494543" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.818047553" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.base.2032340181" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.927555393" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base">
-								<option id="gnu.cpp.link.option.paths.172158164" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="c:/boost_1_6/lib"/>
+								<option id="gnu.cpp.link.option.paths.172158164" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${BoostDir}/lib&quot;"/>
 								</option>
-								<option id="gnu.cpp.link.option.libs.631450310" superClass="gnu.cpp.link.option.libs" valueType="libs">
+								<option id="gnu.cpp.link.option.libs.631450310" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="boost_system"/>
 									<listOptionValue builtIn="false" value="ws2_32"/>
 									<listOptionValue builtIn="false" value="wsock32"/>
@@ -81,11 +94,17 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.173674307" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler">
 								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.option.optimization.level.734026118" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.647144402" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.none" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.300410966" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.190844211" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.306001935" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler">
 								<option id="gnu.cpp.compiler.option.optimization.level.513833490" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.debugging.level.1536904801" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.include.paths.948917471" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1510479826" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.296443842" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker"/>
@@ -97,6 +116,9 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.1772801583" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.2092021088" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
+								<option id="gnu.both.asm.option.include.paths.2006684101" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1609630991" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -109,21 +131,27 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="app_004_http.cdt.managedbuild.target.gnu.cross.exe.279891043" name="Executable" projectType="cdt.managedbuild.target.gnu.cross.exe"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1849592739;cdt.managedbuild.config.gnu.cross.exe.release.1849592739.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.306001935;cdt.managedbuild.tool.gnu.cpp.compiler.input.1510479826">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1849592739;cdt.managedbuild.config.gnu.cross.exe.release.1849592739.;cdt.managedbuild.tool.gnu.cross.c.compiler.173674307;cdt.managedbuild.tool.gnu.c.compiler.input.190844211">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.835072532;cdt.managedbuild.config.gnu.cross.exe.debug.835072532.;cdt.managedbuild.tool.gnu.c.compiler.mingw.base.877375676;cdt.managedbuild.tool.gnu.c.compiler.input.818047553">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.835072532;cdt.managedbuild.config.gnu.cross.exe.debug.835072532.;cdt.managedbuild.tool.gnu.cross.c.compiler.3236105;cdt.managedbuild.tool.gnu.c.compiler.input.552950918">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.835072532;cdt.managedbuild.config.gnu.cross.exe.debug.835072532.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1273889477;cdt.managedbuild.tool.gnu.cpp.compiler.input.555756165">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1849592739;cdt.managedbuild.config.gnu.cross.exe.release.1849592739.;cdt.managedbuild.tool.gnu.cross.c.compiler.173674307;cdt.managedbuild.tool.gnu.c.compiler.input.190844211">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.release.1849592739;cdt.managedbuild.config.gnu.cross.exe.release.1849592739.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.306001935;cdt.managedbuild.tool.gnu.cpp.compiler.input.1510479826">
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.835072532;cdt.managedbuild.config.gnu.cross.exe.debug.835072532.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.606308969;cdt.managedbuild.tool.gnu.cpp.compiler.input.870097373">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
 </cproject>
