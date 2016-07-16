@@ -1,40 +1,28 @@
-/*
- * main.cpp
- *
- *  Created on: 30 θώνÿ 2016 γ.
- *      Author: i.brickii
- */
+//#ifdef WIN32
+//#define _WIN32_WINNT 0x0501
+//#include <stdio.h>
+//#endif
+
+
+//#include <boost/thread.hpp>
+//#include <boost/bind.hpp>
+//#include <boost/asio.hpp>
+//#include <boost/shared_ptr.hpp>
+//#include <boost/enable_shared_from_this.hpp>
 
 #include "client.hpp"
-#include <boost/asio/io_service.hpp>
+//using namespace boost::asio;
+//io_service service;
 
-using namespace boost;
-using namespace asio;
 
-io_service service;
+int main(int argc, char* argv[]) {
+    // connect several clients
+    ip::tcp::endpoint ep( ip::address::from_string("127.0.0.1"), 8001);
+    char* names[] = { "John", "James", "Lucy", "Tracy", "Frank", "Abby", 0 };
+    for ( char ** name = names; *name; ++name) {
+        talk_to_svr::start(ep, *name);
+        boost::this_thread::sleep( boost::posix_time::millisec(100));
+    }
 
-void connect_handler(const boost::system::error_code & ec)
- {
-    // here we know we connected successfully
-    // if ec indicates success
+    service.run();
 }
-
-
-int main(int argc, char* argv[])
-{
-//	HANDLE file = ::CreateFile("readme.txt", GENERIC_READ, 0, 0,
-//	OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED,0);
-//	windows::random_access_handle h(service, file);
-//	streambuf buf;
-//	read_at(h, 256, buf, transfer_exactly(128));
-//	std::istream in(&buf);
-//	std::string line;
-//	std::getline(in, line);
-//	std::cout << "first line: " << line << std::endl;
-
-	ip::tcp::endpoint ep( ip::address::from_string("127.0.0.1"), 2001);
-	ip::tcp::socket sock(service);
-	sock.async_connect(ep, connect_handler);
-	service.run();
-}
-
