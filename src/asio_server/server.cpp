@@ -5,7 +5,9 @@
 #include <iostream>
 
 
+#include "common.hpp"
 #include "crypto.h"
+
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
@@ -826,14 +828,6 @@ namespace Constants
 using namespace EGTS;
 
 
-void PrintTimeStamp()
-{
-	boost::date_time::winapi::SYSTEMTIME currentSystemTime;
-	boost::date_time::winapi::GetSystemTime(&currentSystemTime);
-	std::cout << "Time: " << std::setfill ('0') << currentSystemTime.wHour << ":" << std::setw(2) << currentSystemTime.wMinute << \
-			":" << std::setw(2) << currentSystemTime.wSecond << "." << std::setw(3) << currentSystemTime.wMilliseconds << std::endl;
-}
-
 /** simple connection to server:
     - logs in just with username (no password)
     - all connections are initiated by the client: client asks, server answers
@@ -880,22 +874,27 @@ public:
     void set_clients_changed() { clients_changed_ = true; }
 private:
     void on_read(const error_code & err, size_t bytes) {
+    	PrintTimeStamp();
     	std::cout << "on_read" << std::endl;
         if ( err) stop();
         if ( !started() ) return;
 
         // process the msg
         std::string msg(read_buffer_, bytes);
-        std::cout << "Rcv msg " << msg << std::endl;
+        std::cout << "Rcv msg \"" << msg << "\"" << std::endl;
+
+        // TODO place Parser() here
 
         if ( msg.find("login ") == 0) on_login(msg);
         else if ( msg.find("ping") == 0) on_ping();
         else if ( msg.find("ask_clients") == 0) on_clients();
         else std::cerr << "invalid msg " << msg << std::endl;
+
+        on_check_ping();
     }
 
     void on_login(const std::string & msg) {
-    	std::cout << "on login" << std::endl;
+    	std::cout << "login" << std::endl;
         std::istringstream in(msg);
         in >> username_ >> username_;
         std::cout << username_ << " logged in" << std::endl;
@@ -905,6 +904,8 @@ private:
     void on_ping() {
         do_write(clients_changed_ ? "ping client_list_changed\n" : "ping ok\n");
         clients_changed_ = false;
+
+        last_ping = boost::posix_time::microsec_clock::local_time();
     }
     void on_clients() {
         std::string msg;
@@ -921,12 +922,16 @@ private:
     }
 
     void on_check_ping() {
+    	PrintTimeStamp();
+
         boost::posix_time::ptime now = boost::posix_time::microsec_clock::local_time();
         if ( (now - last_ping).total_milliseconds() > 5000) {
             std::cout << "stopping " << username_ << " - no ping in time" << std::endl;
-//            stop();
+            stop();
         }
-        last_ping = boost::posix_time::microsec_clock::local_time();
+//        last_ping = boost::posix_time::microsec_clock::local_time();
+
+        std::cout << "Client list size: " << clients.size() << std::endl;
     }
     void post_check_ping() {
         timer_.expires_from_now(boost::posix_time::millisec(5000));
@@ -1062,12 +1067,11 @@ private:
     }
 
     size_t read_complete(const boost::system::error_code & err, size_t bytes) {
-    	std::cout << "read_complete, erc " << err << std::endl;
         if ( err) return 0;
-//        bool found = std::find(read_buffer_, read_buffer_ + bytes, '\n') < read_buffer_ + bytes;
-        return Parser((uint8_t *)read_buffer_, bytes);
+        bool found = std::find(read_buffer_, read_buffer_ + bytes, '\n') < read_buffer_ + bytes;
+//        return Parser((uint8_t *)read_buffer_, bytes);
         // we read one-by-one until we get to enter, no buffering
-//        return found ? 0 : 1;
+        return found ? 0 : 1;
     }
 private:
     ip::tcp::socket sock_;
@@ -1096,15 +1100,6 @@ void handle_accept(talk_to_client::ptr client, const boost::system::error_code &
 
 
 int main(int argc, char* argv[]) {
-//	time_t currentTime;
-//	time(&currentTime);
-//	boost::date_time::winapi::SYSTEMTIME currentSystemTime;
-//	boost::date_time::winapi::GetSystemTime(&currentSystemTime);
-//	clock_t currentClock = clock();
-//	char *timeString = asctime(gmtime(&currentTime));
-//	std::cout << "Started at " << timeString << std::endl;
-//	std::cout << "Time: " << currentTime << std::endl << "Clocks: " << currentClock << std::endl;
-//	std::cout << "Api time: " << currentSystemTime.wHour << ":" << currentSystemTime.wMinute << ":" << currentSystemTime.wSecond << "." << currentSystemTime.wMilliseconds << std::endl;
 	PrintTimeStamp();
     talk_to_client::ptr client = talk_to_client::new_();
     acceptor.async_accept(client->sock(), boost::bind(handle_accept,client,_1));

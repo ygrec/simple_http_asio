@@ -11,8 +11,9 @@
 //#include <boost/enable_shared_from_this.hpp>
 
 #include "client.hpp"
+#include "common.hpp"
 //using namespace boost::asio;
-//io_service service;
+io_service service;
 
 
 int main(int argc, char* argv[]) {
@@ -21,7 +22,9 @@ int main(int argc, char* argv[]) {
     char* names[] = { "John", "James", "Lucy", "Tracy", "Frank", "Abby", 0 };
     for ( char ** name = names; *name; ++name) {
         talk_to_svr::start(ep, *name);
-        boost::this_thread::sleep( boost::posix_time::millisec(100));
+//        boost::posix_time::millisec timeout = boost::posix_time::millisec(100);
+//        std::cout << "Timeout is " << timeout.ticks() << std::endl;
+//        boost::this_thread::sleep(timeout);
     }
 
     service.run();

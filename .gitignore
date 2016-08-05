@@ -4,3 +4,5 @@ Debug
 /HttpAsio/
 /AsioClient/
 /AsioServer/
+/AsioEgtsClient/
+/AsioEgtsServer/
